@@ -1,7 +1,7 @@
 version: '2'
 services:
   mysql:
-    image: mysql
+    image: mysql:latest
     command: --default-authentication-plugin=mysql_native_password
     restart: always
     environment:
@@ -41,7 +41,7 @@ services:
 
 
   employee_management:
-    image: andreiazemsha/employee_management
+    image: andreiazemsha/employee_management:latest
     container_name: employee_management
     expose:
       - 8090
