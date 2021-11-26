@@ -1,10 +1,7 @@
 package com.example.employee.employee_management.exceptions;
 
-import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.http.converter.HttpMessageNotReadableException;
-import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
 import org.springframework.web.client.HttpClientErrorException;
@@ -30,17 +27,5 @@ public class EmployeeExceptionHandler extends ResponseEntityExceptionHandler {
 	public final ResponseEntity<Object> handleEmployeeGeneralException(Exception ex, WebRequest request) {
 		ErrorMessage ErrorMessage = new ErrorMessage(ex.getLocalizedMessage(), request.getDescription(true));
 		return new ResponseEntity<>(ErrorMessage, HttpStatus.INTERNAL_SERVER_ERROR);
-	}
-
-	@Override
-	public ResponseEntity<Object> handleHttpMessageNotReadable(HttpMessageNotReadableException ex, HttpHeaders headers, HttpStatus status, WebRequest request) {
-		ErrorMessage ErrorMessage = new ErrorMessage(ex.getLocalizedMessage(), request.getDescription(false));
-		return new ResponseEntity<>(ErrorMessage, status);
-	}
-
-	@Override
-	protected ResponseEntity<Object> handleMethodArgumentNotValid(MethodArgumentNotValidException ex, HttpHeaders headers, HttpStatus status, WebRequest request) {
-		ErrorMessage ErrorMessage = new ErrorMessage(ex.getLocalizedMessage(), request.getDescription(false));
-		return new ResponseEntity<>(ErrorMessage, status);
 	}
 }
